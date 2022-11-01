@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import pyodbc
 app = Flask(__name__,template_folder='templates')
 
-def connection():
+def connection(query,getResult = True):
     s = 'DESKTOP-EGO85AB\SQLEXPRESS' #Your server name
     d = 'website' # database
     u = 'Jason' #Your login
@@ -11,22 +11,21 @@ def connection():
     conn = pyodbc.connect(cstr)
     print('CONNECTED!')
     cursor = conn.cursor()
-
-    return conn
+    cursor.execute(query)
+    if getResult:
+        result = cursor.fetchall()
+    else:
+        result = None
+    conn.commit()
+    conn.close()
+    return result
 
 
 
 @app.route("/", methods=['POST','GET'])
 def hello_world():
-
-    conn = connection()
-    cursor = conn.cursor()
-    # cursor.execute("insert into dbo.customer values ('zero', 'zero_', 23, 'onee@gmail.com', 'M')")
-    cursor.execute("SELECT * FROM dbo.customer")
-    for i in cursor.fetchall():
-        print(i)
-    conn.commit() 
-    conn.close()
+    # result = connection("insert into customer values ('jason', 'leong', 23, '123000@gmail.com', 'M')",getResult=False)
+    result = connection("select * from customer ", getResult=True)
     return render_template('test.html')
 
 @app.route("/result")
