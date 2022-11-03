@@ -32,7 +32,7 @@ def hello_world():
         result = connection("select email from customer where id = 1", getResult=True)
         session['email'] = result
         return redirect(url_for('result'))
-    return render_template('test.html')
+    return render_template('test.html',r = {'a':'a','b':'b'})
 
 @app.route("/result")
 def result():

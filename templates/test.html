@@ -7,6 +7,13 @@
 <body>
 
 <form method="POST">
+    {% if 'a' in r %}
+    {{r['a']}}
+    {% endif %}
+    {% if 'b' in r %}
+    {{r['b']}}
+
+    {% endif %}
     <input type="text" name="description100">
     <input type="submit" value="Cancel" name="cancel100">
     <input type="submit" value="submit" name="submit100">
