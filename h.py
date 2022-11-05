@@ -25,7 +25,7 @@ def connection(query,getResult = True):
 
 
 
-@app.route("/", methods=['POST','GET'])
+@app.route("/hello", methods=['POST','GET'])
 def hello_world():
     # result = connection("insert into customer values ('jason', 'leong', 23, '123000@gmail.com', 'M')",getResult=False)
     if request.method == 'POST':
