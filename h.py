@@ -33,7 +33,8 @@ def hello_world():
         session['email'] = result
         return redirect(url_for('result'))
     t = url_for('static', filename='images/AI.jpg')
-    return render_template('test.html',r = {'a':'a','b':'b','testing':t})
+    w = url_for('static', filename='a.wav')
+    return render_template('test.html',r = {'a':'a','b':'b','testing':t,'wav':w})
 
 @app.route("/result")
 def result():
